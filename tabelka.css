@@ -1,15 +1,15 @@
 .table{
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: collapse;
-    border-spacing: 0;
-    margin-bottom: 1%;
 }
 
-.table td,th {
+.table td {
     font-size: 14px;
     border-top: 1px solid #ddd;
-    padding: 5px 12px;
-    text-align: left;
+    padding: 6px 12px;
+    text-align: center;
     vertical-align: top;
 }
 
@@ -17,8 +17,12 @@ form input{
     width: 100px;
     height: 30px;
     border: none;
-    margin-top: 15px;
+    margin-top: 10px;
     text-align: center;
     font-size: 12px;
     color: #666;
+}
+
+.button{
+    font
 }
