@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 25 Mar 2020, 14:55
+-- Czas generowania: 29 Mar 2020, 19:53
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.4.3
 
@@ -53,7 +53,7 @@ INSERT INTO `auto` (`ID`, `MARKA`, `MODEL`, `MOC`, `SILNIK`) VALUES
 --
 
 CREATE TABLE `klienci` (
-  `ID` int(11) NOT NULL,
+  `ID` int(8) NOT NULL,
   `Imie` varchar(20) NOT NULL,
   `Nazwisko` varchar(20) NOT NULL,
   `Miejscowosc` varchar(30) NOT NULL,
@@ -77,22 +77,24 @@ INSERT INTO `klienci` (`ID`, `Imie`, `Nazwisko`, `Miejscowosc`, `Telefon`) VALUE
 --
 
 CREATE TABLE `oferty` (
-  `ID` int(11) NOT NULL,
+  `ID` int(8) NOT NULL,
   `Model` varchar(30) NOT NULL,
   `Cena` varchar(20) NOT NULL,
   `Przebieg` varchar(20) NOT NULL,
-  `Vin` varchar(20) NOT NULL
+  `Vin` varchar(20) NOT NULL,
+  `klienci_fk` int(8) NOT NULL,
+  `auto_fk` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `oferty`
 --
 
-INSERT INTO `oferty` (`ID`, `Model`, `Cena`, `Przebieg`, `Vin`) VALUES
-(1, 'Seria 1', '200000 PLN', '100 ', 'TMAD351CADJ075080'),
-(2, 'Seria 3', '300000 PLN', '200', 'WF0SXXGCDS8S68720'),
-(3, 'Seria 5', '450000 PLN', '100', 'VF7GJKFWC93333517'),
-(4, 'Seria 7', '600000 PLN', '450', 'NMTEB16R40R045756');
+INSERT INTO `oferty` (`ID`, `Model`, `Cena`, `Przebieg`, `Vin`, `klienci_fk`, `auto_fk`) VALUES
+(1, 'Seria 1', '200000 PLN', '100 ', 'TMAD351CADJ075080', 1, 2),
+(2, 'Seria 3', '300000 PLN', '200', 'WF0SXXGCDS8S68720', 2, 1),
+(3, 'Seria 5', '450000 PLN', '100', 'VF7GJKFWC93333517', 3, 3),
+(4, 'Seria 7', '600000 PLN', '450', 'NMTEB16R40R045756', 4, 4);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -114,7 +116,9 @@ ALTER TABLE `klienci`
 -- Indeksy dla tabeli `oferty`
 --
 ALTER TABLE `oferty`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `klienci_fk` (`klienci_fk`),
+  ADD KEY `auto_fk` (`auto_fk`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -130,13 +134,24 @@ ALTER TABLE `auto`
 -- AUTO_INCREMENT dla tabeli `klienci`
 --
 ALTER TABLE `klienci`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `oferty`
 --
 ALTER TABLE `oferty`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `oferty`
+--
+ALTER TABLE `oferty`
+  ADD CONSTRAINT `oferty_ibfk_1` FOREIGN KEY (`klienci_fk`) REFERENCES `klienci` (`ID`),
+  ADD CONSTRAINT `oferty_ibfk_2` FOREIGN KEY (`auto_fk`) REFERENCES `auto` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
