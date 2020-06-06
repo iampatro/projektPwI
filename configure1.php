@@ -51,7 +51,7 @@
     
         <script>
             function configure1() {
-                conf = window.open('confgiure1.php', '', 'width=500,height:700');
+                conf = window.open('confgiure1.php', '', 'width=500,height=700');
             }
 
             function closeWindows() {

@@ -27,12 +27,9 @@
 
     $sql    = 'INSERT INTO konfiguracje (seria, dane, email, silnik, kolor) VALUES ("'.$seria.'", "'.$dane.'", "'.$email.'", "'.$engine.'", "'.$color.'")';
     $result = mysqli_query($conn, $sql);
-
-    redirect('index.php');
 ?>
-<?php
-header("Location: seria7.html");
-?>
-    
+    <script>
+        close();
+    </script>
     </body>
 </html>

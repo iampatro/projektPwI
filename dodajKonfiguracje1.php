@@ -20,19 +20,21 @@
     $password   = '8q91?xsQ';
     $dbname     = 'logowanie';
 
+    echo 'debug: before conn';
     $conn = mysqli_connect($host, $user, $password, $dbname);
     if(!$conn) {
         die('Connection refused: '.mysqli_connect_error());
     }
 
+    echo 'debug: before sql';
     $sql    = 'INSERT INTO konfiguracje (seria, dane, email, silnik, kolor) VALUES ("'.$seria.'", "'.$dane.'", "'.$email.'", "'.$engine.'", "'.$color.'")';
     $result = mysqli_query($conn, $sql);
-
-    redirect('index.php');
-?>
-<?php
-header("Location: seria1.html");
-?>
+    echo 'debug: before header';
     
+    #header("Location: seria1.html");
+    ?>
+    <script>
+        close();
+    </script>
     </body>
 </html>
